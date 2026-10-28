@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ArrowDown, ArrowRight, ArrowUpRight, ChevronDown, Compass, FileCheck2, HeartHandshake, Instagram, MapPin, Menu, MessageCircle, Shield, ShieldCheck, Users, X, Zap } from 'lucide-react';
 import ConsultantFinder from './components/ConsultantFinder.jsx';
-import { benefits, faqs } from './data/siteConfig.js';
+import { benefits, faqs, vehiclePlans } from './data/siteConfig.js';
 import { siteConfig } from './data/siteConfig.js';
 import phoenix from './assets/logos/phoenix-mark.svg';
 import wordmark from './assets/logos/wordmark.svg';
@@ -11,7 +11,7 @@ const iconMap = { messages: MessageCircle, 'file-check': FileCheck2, users: User
 
 function Header() {
   const [open, setOpen] = useState(false);
-  const links = [['A associação', '#associacao'], ['Como funciona', '#como-funciona'], ['Encontre um consultor', '#consultor'], ['Contato', '#contato'], ['Dúvidas frequentes', '#duvidas']];
+  const links = [['A associação', '#associacao'], ['Planos', '#planos'], ['Como funciona', '#como-funciona'], ['Encontre um consultor', '#consultor'], ['Contato', '#contato'], ['Dúvidas frequentes', '#duvidas']];
   return <header className="site-header">
       <div className="header-inner">
       <a href="#inicio" className="brand" aria-label="AutoFênix — início">
@@ -81,6 +81,9 @@ function Footer() {
 
 
 export default function App() {
+  const [selectedVehicleType, setSelectedVehicleType] = useState(vehiclePlans[0].id);
+  const selectedVehiclePlans = vehiclePlans.find((category) => category.id === selectedVehicleType) || vehiclePlans[0];
+
   return <>
       <Header/>
       <main>
@@ -166,6 +169,36 @@ export default function App() {
       </article>; })}</div>
       <p className="content-note">
       <ShieldCheck size={16}/> Os benefícios, limites e condições aplicáveis devem ser confirmados nos documentos vigentes da associação.</p>
+      </div>
+      </section>
+
+    <section className="plans-section section-pad" id="planos">
+      <div className="section-shell">
+      <SectionHeading kicker="PLANOS DISPONÍVEIS" title={<>Encontre o plano para<br/>o seu tipo de veículo.</>} text="Compare as opções descritas no material comercial da AutoFênix e fale com a equipe para confirmar valores e condições."/>
+      <div className="plan-category-tabs" role="group" aria-label="Tipo de veículo">
+      {vehiclePlans.map((category) => <button
+        key={category.id}
+        type="button"
+        className={selectedVehicleType === category.id ? 'plan-category-tab is-active' : 'plan-category-tab'}
+        aria-pressed={selectedVehicleType === category.id}
+        onClick={() => setSelectedVehicleType(category.id)}
+      >{category.label}</button>)}
+      </div>
+      <p className="plan-category-description">{selectedVehiclePlans.description}</p>
+      <div className="plan-grid">
+      {selectedVehiclePlans.plans.map((plan) => <article className="plan-card" key={plan.name}>
+        <div className="plan-card-heading">
+        <span className="eyebrow">AUTOFÊNIX</span>
+        <h3>Plano {plan.name}</h3>
+        <p>Consulte as condições aplicáveis ao seu veículo.</p>
+        </div>
+        <ul className="plan-features">
+        {plan.features.map((feature) => <li key={feature}><ShieldCheck size={16}/><span>{feature}</span></li>)}
+        </ul>
+        <a className="plan-cta" href={siteConfig.generalWhatsApp} target="_blank" rel="noreferrer">Consultar condições <ArrowUpRight size={16}/></a>
+      </article>)}
+      </div>
+      <p className="plans-disclaimer">Informações transcritas do material comercial fornecido à equipe de desenvolvimento. A disponibilidade, os limites, as regras de acionamento, as exclusões, os valores e as condições contratuais devem ser confirmados diretamente com a AutoFênix antes da adesão. Este site não apresenta preços porque eles não constam do material recebido.</p>
       </div>
       </section>
 
