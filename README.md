@@ -44,6 +44,8 @@ npm run preview
 - Os planos exibidos no site foram transcritos das imagens comerciais fornecidas pela equipe, com as categorias motocicletas, veículos até 2.500 kg e veículos acima de 2.500 kg.
 - Os dados dos planos estão no array `vehiclePlans` em `src/data/siteConfig.js`, para facilitar correções manuais. O material fornecido não contém preços.
 - O WhatsApp geral está configurado como `https://wa.me/5581997839132` e o link de localização usa o compartilhamento do Google informado pela equipe.
+- Sede informada: Pão de Açúcar, Taquaritinga do Norte - PE, CEP 55790-000. Escritórios: segunda a sexta, das 8h às 18h; fechados aos sábados e domingos. A equipe informou atendimento pelo WhatsApp 24 horas de segunda a sexta, sem atendimento aos fins de semana.
+- Dados cadastrais informados pela equipe: Associação Clube Planos de Benefício - Proteção Veicular, CNPJ `34.998.493/0001-12`. Os dados foram fornecidos pela equipe e devem ser conferidos com comprovante cadastral oficial antes da publicação definitiva.
 - Antes de publicar, confirme com a equipe os limites, as regras de acionamento, as exclusões e a versão vigente do material comercial.
 
 ## Configuração antes da publicação
