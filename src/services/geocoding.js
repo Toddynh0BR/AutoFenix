@@ -1,4 +1,4 @@
-const PHOTON_URL = 'https://photon.komoot.io/api/';
+const PHOTON_URL = import.meta.env.DEV ? '/__geocoding/photon' : 'https://photon.komoot.io/api/';
 const NOMINATIM_SEARCH_URL = 'https://nominatim.openstreetmap.org/search';
 
 const PHOTON_RETRY_DELAYS = [350, 900];
@@ -101,17 +101,21 @@ export async function searchAddresses(query, signal) {
   if (q.length < 3) return [];
 
   const url = new URL(PHOTON_URL);
-  url.search = new URLSearchParams({ q, limit: '5', lang: 'pt' }).toString();
+  // O servidor público do Photon responde HTTP 400 ao receber lang=pt.
+  // Omitimos lang e usamos Accept-Language na requisição para negociar idioma.
+  url.search = new URLSearchParams({ q, limit: '5' }).toString();
 
   let response;
   try {
     response = await fetchPhoton(url, signal);
   } catch (error) {
     if (error.name === 'AbortError') throw error;
-    throw new Error('Não foi possível conectar à busca de endereços. Tente novamente em alguns segundos.');
+    console.error('[AutoFênix][geocoding] Falha na busca Photon:', { query: q, error: error.message });
+    throw new Error(error.message || 'Não foi possível conectar à busca de endereços. Tente novamente em alguns segundos.');
   }
 
   const data = await response.json();
+  console.debug('[AutoFênix][geocoding] Photon respondeu:', { query: q, results: data.features?.length ?? 0 });
   return mapPhotonResults(data.features || []);
 }
 
@@ -154,11 +158,10 @@ export async function searchAddressesAlternative(query, signal) {
 }
 
 export async function reverseGeocode(latitude, longitude, signal) {
-  const url = new URL('https://photon.komoot.io/reverse');
+  const url = new URL(import.meta.env.DEV ? '/__geocoding/photon/reverse' : 'https://photon.komoot.io/reverse', window.location.origin);
   url.search = new URLSearchParams({
     lat: String(latitude),
     lon: String(longitude),
-    lang: 'pt',
   }).toString();
 
   let response;
