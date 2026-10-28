@@ -24,3 +24,154 @@ export const faqs = [
   { q: 'Já sou associado. Como consigo atendimento?', a: 'Entre em contato pelo WhatsApp oficial (81) 99783-9132 e informe à equipe que você já é associado para receber orientação sobre o canal adequado à sua solicitação. Este número é o canal geral informado pela empresa, não uma central exclusiva de assistência 24 horas.' },
   { q: 'O site salva meu nome ou minha localização?', a: 'Nesta versão, o formulário mantém os dados apenas no estado temporário da página. A busca de endereço pode enviar o texto digitado ao serviço de geocodificação e o mapa carrega dados de um provedor externo. Os dados não são gravados em um banco de dados pelo site.' },
 ];
+
+
+/**
+ * Planos transcritos do material comercial recebido em 17/09/2026.
+ * Revise valores, regras, limites, elegibilidade e condições com a equipe
+ * antes de publicar alterações ou utilizar o conteúdo em campanhas.
+ */
+export const vehiclePlans = [
+  {
+    id: 'carros-ate-2500',
+    label: 'Carros até 2.500 kg',
+    description: 'Automóveis leves, importados e veículos pesados de até 2.500 kg.',
+    plans: [
+      {
+        name: 'Simples',
+        features: [
+          'Cobertura de 100% da FIPE',
+          'Cobertura nacional',
+          'Roubo e furto',
+          'Assistência/reboque de até 100 km por mês',
+          'Limite de um acionamento a cada 30 dias; encaminhamento para oficina mais próxima conforme o tipo de pane',
+          'Pane elétrica, pane mecânica e colisão, conforme as condições do plano',
+        ],
+      },
+      {
+        name: 'Básico',
+        features: [
+          'Cobertura de 100% da FIPE',
+          'Cobertura nacional',
+          'Roubo e furto',
+          'Incêndio, colisão e perda total',
+          'Fenômenos da natureza: queda de árvore e chuva de granizo',
+          'Assistência 24 horas',
+          'Reboque de até 300 km por mês',
+          'Reboque: um acionamento a cada 30 dias, sujeito às condições da pane e encaminhamento à oficina mais próxima',
+          'Assistência para colisão, pane elétrica, pane mecânica, pane seca e borracharia',
+        ],
+      },
+      {
+        name: 'Top',
+        features: [
+          'Cobertura de 100% da FIPE',
+          'Cobertura nacional',
+          'Roubo e furto',
+          'Incêndio, colisão e perda total',
+          'Fenômenos da natureza: queda de árvore e chuva de granizo',
+          'Danos a terceiros até R$ 10.000',
+          'Assistência 24 horas',
+          'Reboque de até 500 km por mês',
+          'Assistência para colisão, pane elétrica, pane mecânica, pane seca e borracharia',
+          'Desconto de 70% na troca de vidros externos, uma vez a cada 12 meses',
+          'Desconto de 70% na troca de faróis',
+          'Veículo reserva por 7 dias',
+          'Hospedagem: R$ 100 anuais, conforme as regras do plano',
+          'Chaveiro para abertura do veículo: R$ 150 anuais, conforme as regras do plano',
+          'Táxi, conforme as condições do plano',
+        ],
+      },
+    ],
+  },
+  {
+    id: 'motocicletas',
+    label: 'Motocicletas',
+    description: 'Planos para motocicletas, conforme o material comercial fornecido.',
+    plans: [
+      {
+        name: 'Simples',
+        features: [
+          'Cobertura de 100% da FIPE',
+          'Cobertura nacional',
+          'Roubo e furto',
+        ],
+      },
+      {
+        name: 'Básico',
+        features: [
+          'Cobertura de 100% da FIPE',
+          'Cobertura nacional',
+          'Roubo e furto',
+          'Incêndio, colisão e perda total',
+          'Fenômenos da natureza: queda de árvore e chuva de granizo',
+          'Assistência 24 horas',
+          'Reboque para colisão de até 300 km (150 km de ida e 150 km de volta)',
+          'Acionamento do reboque sujeito ao limite de um a cada 30 dias e às condições do plano',
+        ],
+      },
+      {
+        name: 'Top',
+        features: [
+          'Cobertura de 100% da FIPE',
+          'Cobertura nacional',
+          'Roubo e furto',
+          'Incêndio, colisão e perda total',
+          'Fenômenos da natureza: queda de árvore e chuva de granizo',
+          'Danos a terceiros até R$ 10.000',
+          'Assistência 24 horas',
+          'Reboque de até 300 km por mês',
+          'Assistência para colisão, pane elétrica, pane mecânica, pane seca e borracharia',
+          'Acionamento do reboque sujeito às regras e limites do plano',
+        ],
+      },
+    ],
+  },
+  {
+    id: 'veiculos-acima-2500',
+    label: 'Veículos acima de 2.500 kg',
+    description: 'Planos para veículos com peso acima de 2.500 kg.',
+    plans: [
+      {
+        name: 'Simples',
+        features: [
+          'Cobertura de 100% da FIPE',
+          'Cobertura nacional',
+          'Roubo e furto',
+        ],
+      },
+      {
+        name: 'Básico',
+        features: [
+          'Cobertura de 100% da FIPE',
+          'Cobertura nacional',
+          'Roubo e furto',
+          'Incêndio, colisão e perda total',
+          'Fenômenos da natureza: queda de árvore e chuva de granizo',
+          'Assistência 24 horas',
+          'Reboque de até 300 km por mês',
+          'Assistência para colisão, pane elétrica, pane mecânica, pane seca e borracharia',
+        ],
+      },
+      {
+        name: 'Top',
+        features: [
+          'Cobertura de 100% da FIPE',
+          'Cobertura nacional',
+          'Roubo e furto',
+          'Incêndio, colisão e perda total',
+          'Fenômenos da natureza: queda de árvore e chuva de granizo',
+          'Danos a terceiros até R$ 10.000',
+          'Assistência 24 horas',
+          'Reboque de até 500 km por mês',
+          'Assistência para colisão, pane elétrica, pane mecânica, pane seca e borracharia',
+          'Desconto de 60% na troca de vidros externos',
+          'Desconto de 50% na troca de faróis',
+          'Hospedagem: R$ 100 anuais, conforme as regras do plano',
+          'Chaveiro para abertura do veículo: R$ 150 anuais, conforme as regras do plano',
+          'Táxi de até 50 km ida e volta, conforme as condições do plano',
+        ],
+      },
+    ],
+  },
+];
