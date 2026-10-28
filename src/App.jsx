@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { ArrowDown, ArrowRight, ArrowUpRight, ChevronDown, Compass, FileCheck2, HeartHandshake, Instagram, MapPin, Menu, MessageCircle, Shield, ShieldCheck, Users, X, Zap } from 'lucide-react';
 import ConsultantFinder from './components/ConsultantFinder.jsx';
-import { benefits, faqs, vehiclePlans } from './data/siteConfig.js';
-import { siteConfig } from './data/siteConfig.js';
+import { benefits, faqs, siteConfig, vehiclePlans } from './data/siteConfig.js';
 import phoenix from './assets/logos/phoenix-mark.svg';
 import wordmark from './assets/logos/wordmark.svg';
 
@@ -69,6 +68,13 @@ function Footer() {
       <a href="#associados">Atendimento a associados</a>
       <a href="#privacidade">Política de privacidade</a>
       </div>
+      </div>
+      <div className="company-details">
+      <strong>{siteConfig.legalName}</strong>
+      <span>CNPJ: {siteConfig.cnpj}</span>
+      <span>Sede principal: {siteConfig.headquarters}</span>
+      <span>Horário dos escritórios: {siteConfig.officeHours}</span>
+      <span>{siteConfig.whatsappHours}</span>
       </div>
       <div className="footer-bottom">
       <span>© {new Date().getFullYear()} AutoFênix Proteção Veicular.</span>
@@ -257,7 +263,7 @@ export default function App() {
       <div className="members-copy">
       <span className="eyebrow">VOCÊ JÁ FAZ PARTE?</span>
       <h2>Conte com informação para o próximo passo.</h2>
-      <p>Se você já é associado e precisa de orientação, fale com a equipe pelo WhatsApp oficial e informe que já faz parte da AutoFênix. A equipe poderá indicar o canal adequado à sua solicitação.</p>
+      <p>Se você já é associado e precisa de orientação, fale com a equipe pelo WhatsApp oficial e informe que já faz parte da AutoFênix. O atendimento pelo WhatsApp ocorre 24 horas de segunda a sexta-feira, sem atendimento aos sábados e domingos.</p>
       </div>
       <a className="button button-outline" href={siteConfig.memberSupportUrl} target="_blank" rel="noreferrer"><MessageCircle size={17}/> Falar com a equipe pelo WhatsApp <ArrowUpRight size={17}/>
       </a>
@@ -272,14 +278,16 @@ export default function App() {
       <span className="contact-card-kicker">ATENDIMENTO</span>
       <strong>Converse pelo WhatsApp</strong>
       <span className="contact-card-detail">(81) 99783-9132</span>
+      <span className="contact-card-detail">{siteConfig.whatsappHours}</span>
       <span className="contact-card-link">Iniciar conversa <ArrowUpRight size={16}/></span>
       </a>
       <a className="contact-card" href={siteConfig.googleProfile} target="_blank" rel="noreferrer">
       <span className="contact-card-icon"><MapPin size={23}/></span>
-      <span className="contact-card-kicker">LOCALIZAÇÃO</span>
-      <strong>Encontre nossa empresa</strong>
-      <span className="contact-card-detail">Consulte o endereço e a rota no Google Maps.</span>
-      <span className="contact-card-link">Ver no mapa <ArrowUpRight size={16}/></span>
+      <span className="contact-card-kicker">SEDE PRINCIPAL</span>
+      <strong>Pão de Açúcar, Taquaritinga do Norte</strong>
+      <span className="contact-card-detail">Pernambuco — CEP 55790-000</span>
+      <span className="contact-card-detail">Escritórios: {siteConfig.officeHours}. Fechados aos sábados e domingos.</span>
+      <span className="contact-card-link">Ver localização no Google Maps <ArrowUpRight size={16}/></span>
       </a>
       <a className="contact-card" href={siteConfig.instagram} target="_blank" rel="noreferrer">
       <span className="contact-card-icon"><Instagram size={23}/></span>
