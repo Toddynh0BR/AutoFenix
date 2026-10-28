@@ -13,33 +13,44 @@ async function fetchPhoton(url, signal) {
   for (let attempt = 0; attempt <= PHOTON_RETRY_DELAYS.length; attempt += 1) {
     if (signal?.aborted) throw new DOMException('A busca foi cancelada.', 'AbortError');
 
+    let response;
     try {
-      const response = await fetch(url, {
+      response = await fetch(url, {
         signal,
         headers: { Accept: 'application/json' },
       });
-
-      if (response.ok) return response;
-
-      // Não repetir erros de requisição; repetir somente erros temporários.
-      if (response.status !== 429 && response.status < 500) {
-        throw new Error(`Photon respondeu com HTTP ${response.status}.`);
-      }
-
-      lastError = new Error(`Photon respondeu com HTTP ${response.status}.`);
     } catch (error) {
       if (error.name === 'AbortError') throw error;
       lastError = error;
     }
 
+    if (response?.ok) return response;
+
+    if (response) {
+      // Erros 4xx (exceto 429) indicam uma requisição inválida e não melhoram
+      // com novas tentativas.
+      if (response.status !== 429 && response.status < 500) {
+        throw new Error(`Photon respondeu com HTTP ${response.status}.`);
+      }
+      lastError = new Error(`Photon respondeu com HTTP ${response.status}.`);
+    }
+
     if (attempt < PHOTON_RETRY_DELAYS.length) {
       await new Promise((resolve, reject) => {
-        const timeout = setTimeout(resolve, PHOTON_RETRY_DELAYS[attempt]);
+        let timeout;
+        const cleanup = () => {
+          if (signal) signal.removeEventListener('abort', onAbort);
+        };
+        const onAbort = () => {
+          clearTimeout(timeout);
+          cleanup();
+          reject(new DOMException('A busca foi cancelada.', 'AbortError'));
+        };
+        timeout = setTimeout(() => {
+          cleanup();
+          resolve();
+        }, PHOTON_RETRY_DELAYS[attempt]);
         if (signal) {
-          const onAbort = () => {
-            clearTimeout(timeout);
-            reject(new DOMException('A busca foi cancelada.', 'AbortError'));
-          };
           if (signal.aborted) onAbort();
           else signal.addEventListener('abort', onAbort, { once: true });
         }
