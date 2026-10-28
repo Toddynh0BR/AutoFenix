@@ -17,7 +17,7 @@ async function fetchPhoton(url, signal) {
     try {
       response = await fetch(url, {
         signal,
-        headers: { Accept: 'application/json' },
+        headers: { Accept: 'application/json', 'Accept-Language': 'pt-BR,pt;q=0.9,en;q=0.8' },
       });
     } catch (error) {
       if (error.name === 'AbortError') throw error;
@@ -100,7 +100,7 @@ export async function searchAddresses(query, signal) {
   const q = query.trim();
   if (q.length < 3) return [];
 
-  const url = new URL(PHOTON_URL);
+  const url = new URL(PHOTON_URL, window.location.origin);
   // O servidor público do Photon responde HTTP 400 ao receber lang=pt.
   // Omitimos lang e usamos Accept-Language na requisição para negociar idioma.
   url.search = new URLSearchParams({ q, limit: '5' }).toString();
