@@ -32,12 +32,19 @@ npm run preview
 
 - `src/App.jsx`: composição e conteúdo das seções da página.
 - `src/components/`: componentes de interface, incluindo formulário, mapa e tratamento de erros.
-- `src/data/siteConfig.js`: links oficiais, textos de benefícios e FAQ editáveis.
+- `src/data/siteConfig.js`: links oficiais, textos de benefícios, FAQ e catálogo editável de planos por categoria de veículo.
 - `src/data/consultores.js`: lista de consultores reais; não use dados fictícios.
 - `src/services/geocoding.js`: integração com o serviço de busca de endereços.
 - `src/utils/distance.js`: cálculo de distância e geração do link de WhatsApp.
 - `src/styles/variables.css`: cores, tipografia e variáveis globais.
 - `src/styles/global.css`: estilos e responsividade.
+
+## Planos e contatos
+
+- Os planos exibidos no site foram transcritos das imagens comerciais fornecidas pela equipe, com as categorias motocicletas, veículos até 2.500 kg e veículos acima de 2.500 kg.
+- Os dados dos planos estão no array `vehiclePlans` em `src/data/siteConfig.js`, para facilitar correções manuais. O material fornecido não contém preços.
+- O WhatsApp geral está configurado como `https://wa.me/5581997839132` e o link de localização usa o compartilhamento do Google informado pela equipe.
+- Antes de publicar, confirme com a equipe os limites, as regras de acionamento, as exclusões e a versão vigente do material comercial.
 
 ## Configuração antes da publicação
 
@@ -63,5 +70,6 @@ O nome e a localização ficam no estado React e não são gravados em banco de 
 - Confirmar canal geral e canal para associados.
 - Validar institucionalmente os textos de benefícios, FAQ e privacidade.
 - Confirmar qualquer alegação regulatória com documentação oficial antes de divulgá-la.
+- Validar se os planos transcritos das imagens de 17/09/2026 continuam vigentes e se a descrição de cada limite corresponde ao regulamento contratual.
 - Adicionar favicon e imagem social de compartilhamento aprovados.
 - Testar em ambiente hospedado real, HTTPS, celulares e navegadores suportados.
