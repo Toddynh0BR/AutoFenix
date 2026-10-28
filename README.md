@@ -2,6 +2,8 @@
 
 Landing page em React + Vite, com localizador de consultores, busca de endereços e mapa interativo.
 
+O arquivo `vite.config.js` ativa o plugin oficial do React, necessário para transformar o JSX dos componentes. Se a página ficar em branco, veja a seção **Diagnóstico de erros** abaixo.
+
 ## Requisitos
 - Node.js 20.19+ (ou versão compatível atual do Vite)
 - npm
@@ -18,6 +20,24 @@ npm test
 npm run build
 npm run preview
 ```
+
+## Diagnóstico de erros
+
+1. Execute `npm run dev` no terminal e abra exatamente o endereço local mostrado pelo Vite.
+2. Se a página mostrar uma mensagem de erro, copie o erro técnico exibido e consulte também o console do navegador (F12 → Console).
+3. Confirme que `npm install` terminou sem erros. Se necessário, execute `npm install` novamente e reinicie o servidor com `npm run dev`.
+4. O `src/main.jsx` envolve a aplicação em um Error Boundary para evitar que erros de renderização resultem apenas em uma tela totalmente branca.
+
+## Organização do código
+
+- `src/App.jsx`: composição e conteúdo das seções da página.
+- `src/components/`: componentes de interface, incluindo formulário, mapa e tratamento de erros.
+- `src/data/siteConfig.js`: links oficiais, textos de benefícios e FAQ editáveis.
+- `src/data/consultores.js`: lista de consultores reais; não use dados fictícios.
+- `src/services/geocoding.js`: integração com o serviço de busca de endereços.
+- `src/utils/distance.js`: cálculo de distância e geração do link de WhatsApp.
+- `src/styles/variables.css`: cores, tipografia e variáveis globais.
+- `src/styles/global.css`: estilos e responsividade.
 
 ## Configuração antes da publicação
 
