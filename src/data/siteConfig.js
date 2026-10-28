@@ -31,6 +31,7 @@ export const faqs = [
   { q: 'O site salva meu nome ou minha localização?', a: 'Nesta versão, o formulário mantém os dados apenas no estado temporário da página. A busca de endereço pode enviar o texto digitado ao serviço de geocodificação e o mapa carrega dados de um provedor externo. Os dados não são gravados em um banco de dados pelo site.' },
 ];
 
+
 /**
  * Planos transcritos do material comercial recebido em 17/09/2026.
  * Revise valores, regras, limites, elegibilidade e condições com a equipe
