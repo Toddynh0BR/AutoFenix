@@ -9,7 +9,7 @@
   --line: #E2E9F4;
   --font-body: 'DM Sans', sans-serif;
   --font-display: 'Manrope', sans-serif;
-  --container: 1200px;
+  --container: 1400px;
   font-family: var(--font-body);
   color: var(--ink);
   background: var(--white);

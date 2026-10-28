@@ -47,7 +47,7 @@ img {
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:30px
+  gap:25px
 }
 .brand img {
   width:196px;
