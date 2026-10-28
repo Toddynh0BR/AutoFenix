@@ -224,7 +224,7 @@ export default function App() {
       <div className="members-copy">
       <span className="eyebrow">VOCÊ JÁ FAZ PARTE?</span>
       <h2>Conte com informação para o próximo passo.</h2>
-      <p>Se você já é associado e precisa de orientação, confirme com a equipe qual canal atende sua solicitação. O canal específico para associados será disponibilizado aqui assim que validado.</p>
+      <p>Se você já é associado e precisa de orientação, fale com a equipe pelo WhatsApp oficial e informe que já faz parte da AutoFênix. A equipe poderá indicar o canal adequado à sua solicitação.</p>
       </div>
       <a className="button button-outline" href={siteConfig.memberSupportUrl} target="_blank" rel="noreferrer"><MessageCircle size={17}/> Falar com a equipe pelo WhatsApp <ArrowUpRight size={17}/>
       </a>
@@ -265,7 +265,7 @@ export default function App() {
       <span className="eyebrow">PERGUNTAS E RESPOSTAS</span>
       <h2>É melhor decidir com tudo às claras.</h2>
       <p>Reunimos algumas informações iniciais. Para detalhes contratuais ou condições específicas, fale com a equipe e consulte os documentos vigentes.</p>
-      <a href={siteConfig.instagram} target="_blank" rel="noreferrer" className="text-link">Ainda tem dúvidas? Fale com a equipe <ArrowUpRight size={17}/>
+      <a href={siteConfig.generalWhatsApp} target="_blank" rel="noreferrer" className="text-link">Ainda tem dúvidas? Fale pelo WhatsApp <ArrowUpRight size={17}/>
       </a>
       <div className="faq-decoration">
       <img src={phoenix} alt=""/>
