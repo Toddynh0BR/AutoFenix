@@ -103,7 +103,7 @@ export async function searchAddresses(query, signal) {
   const url = new URL(PHOTON_URL, window.location.origin);
   // O servidor público do Photon responde HTTP 400 ao receber lang=pt.
   // Omitimos lang e usamos Accept-Language na requisição para negociar idioma.
-  url.search = new URLSearchParams({ q, limit: '5' }).toString();
+  url.search = new URLSearchParams({ q, limit: '5', countrycode: 'BR' }).toString();
 
   let response;
   try {
