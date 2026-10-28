@@ -1,0 +1,20 @@
+:root {
+  --blue-light: #5CA3FF;
+  --navy: #00165B;
+  --blue: #3399FF;
+  --white: #FFFFFF;
+  --ink: #102044;
+  --muted: #64718a;
+  --pale: #F3F7FD;
+  --line: #E2E9F4;
+  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Manrope', sans-serif;
+  --container: 1200px;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--white);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
