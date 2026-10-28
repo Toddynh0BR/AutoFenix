@@ -1865,3 +1865,10 @@ h1,h2,h3,h4,p {
     text-align: left;
   }
 }
+
+
+@media (max-width: 800px) {
+  .nav-whatsapp {
+    display: flex;
+  }
+}
