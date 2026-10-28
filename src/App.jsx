@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowDown, ArrowRight, ArrowUpRight, ChevronDown, Compass, FileCheck2, HeartHandshake, Menu, MessageCircle, Shield, ShieldCheck, Users, X, Zap } from 'lucide-react';
+import { ArrowDown, ArrowRight, ArrowUpRight, ChevronDown, Compass, FileCheck2, HeartHandshake, Instagram, MapPin, Menu, MessageCircle, Shield, ShieldCheck, Users, X, Zap } from 'lucide-react';
 import ConsultantFinder from './components/ConsultantFinder.jsx';
 import { benefits, faqs } from './data/siteConfig.js';
 import { siteConfig } from './data/siteConfig.js';
@@ -11,7 +11,7 @@ const iconMap = { messages: MessageCircle, 'file-check': FileCheck2, users: User
 
 function Header() {
   const [open, setOpen] = useState(false);
-  const links = [['A associação', '#associacao'], ['Como funciona', '#como-funciona'], ['Encontre um consultor', '#consultor'], ['Dúvidas frequentes', '#duvidas']];
+  const links = [['A associação', '#associacao'], ['Como funciona', '#como-funciona'], ['Encontre um consultor', '#consultor'], ['Contato', '#contato'], ['Dúvidas frequentes', '#duvidas']];
   return <header className="site-header">
       <div className="header-inner">
       <a href="#inicio" className="brand" aria-label="AutoFênix — início">
@@ -20,6 +20,7 @@ function Header() {
     <button className="mobile-toggle" aria-label={open ? 'Fechar menu' : 'Abrir menu'} aria-expanded={open} onClick={() => setOpen(!open)}>{open ? <X/> : <Menu/>}</button>
     <nav className={`main-nav ${open ? 'is-open' : ''}`} aria-label="Navegação principal">{links.map(([label, href]) => <a key={href} href={href} onClick={() => setOpen(false)}>{label}</a>)}<a className="nav-cta" href="#consultor" onClick={() => setOpen(false)}>Falar com consultor <ArrowUpRight size={16}/>
       </a>
+      <a className="nav-whatsapp" href={siteConfig.generalWhatsApp} target="_blank" rel="noreferrer"><MessageCircle size={16}/> WhatsApp</a>
       </nav>
   </div>
       </header>;
@@ -61,7 +62,9 @@ function Footer() {
       <h3>Conecte-se</h3>
       <a href={siteConfig.instagram} target="_blank" rel="noreferrer">Instagram <ArrowUpRight size={14}/>
       </a>
-      <a href={siteConfig.googleProfile} target="_blank" rel="noreferrer">Perfil no Google <ArrowUpRight size={14}/>
+      <a href={siteConfig.googleProfile} target="_blank" rel="noreferrer">Ver localização no Google Maps <ArrowUpRight size={14}/>
+      </a>
+      <a href={siteConfig.generalWhatsApp} target="_blank" rel="noreferrer">WhatsApp: (81) 99783-9132 <ArrowUpRight size={14}/>
       </a>
       <a href="#associados">Atendimento a associados</a>
       <a href="#privacidade">Política de privacidade</a>
@@ -223,7 +226,7 @@ export default function App() {
       <h2>Conte com informação para o próximo passo.</h2>
       <p>Se você já é associado e precisa de orientação, confirme com a equipe qual canal atende sua solicitação. O canal específico para associados será disponibilizado aqui assim que validado.</p>
       </div>
-      <a className="button button-outline" href={siteConfig.instagram} target="_blank" rel="noreferrer">Acessar Instagram oficial <ArrowUpRight size={17}/>
+      <a className="button button-outline" href={siteConfig.memberSupportUrl} target="_blank" rel="noreferrer"><MessageCircle size={17}/> Falar com a equipe pelo WhatsApp <ArrowUpRight size={17}/>
       </a>
       </section>
 
