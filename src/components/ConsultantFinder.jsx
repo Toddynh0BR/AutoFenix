@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowUpRight, CheckCircle2, LoaderCircle, MapPin, LocateFixed, MessageCircle, Search, ShieldCheck } from 'lucide-react';
 import LocationMap from './LocationMap.jsx';
-import { searchAddresses, reverseGeocode } from '../services/geocoding.js';
+import { searchAddresses, searchAddressesAlternative, reverseGeocode } from '../services/geocoding.js';
 import { consultores } from '../data/consultores.js';
 import { findNearestConsultant, createWhatsAppUrl, isValidCoordinate } from '../utils/distance.js';
 import { siteConfig } from '../data/siteConfig.js';
@@ -13,6 +13,7 @@ export default function ConsultantFinder() {
   const [location, setLocation] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
   const [loadingSuggestions, setLoadingSuggestions] = useState(false);
+  const [fallbackAvailable, setFallbackAvailable] = useState(false);
   const [gpsLoading, setGpsLoading] = useState(false);
   const [error, setError] = useState('');
   const [result, setResult] = useState(null);
@@ -28,14 +29,54 @@ export default function ConsultantFinder() {
       abortRef.current?.abort();
       const controller = new AbortController(); abortRef.current = controller;
       setLoadingSuggestions(true); setError('');
-      try { setSuggestions(await searchAddresses(query, controller.signal)); }
-      catch (e) { if (e.name !== 'AbortError') setError(e.message || 'Não foi possível buscar endereços agora.'); }
-      finally { if (!controller.signal.aborted) setLoadingSuggestions(false); }
+      try {
+        const results = await searchAddresses(query, controller.signal);
+        setSuggestions(results);
+        setFallbackAvailable(false);
+        if (results.length === 0) setError('Nenhum endereço encontrado. Tente informar rua, bairro, cidade ou CEP.');
+      } catch (e) {
+        if (e.name !== 'AbortError') {
+          setError('A busca rápida de endereços está indisponível. Tente a busca alternativa ou marque o ponto no mapa.');
+          setFallbackAvailable(true);
+        }
+      } finally {
+        if (!controller.signal.aborted) setLoadingSuggestions(false);
+      }
     }, 850);
     return () => clearTimeout(timerRef.current);
   }, [query, location]);
 
+  async function tryAlternativeSearch() {
+    if (query.trim().length < 3) {
+      setError('Digite pelo menos 3 caracteres antes de buscar um endereço.');
+      return;
+    }
+
+    abortRef.current?.abort();
+    const controller = new AbortController();
+    abortRef.current = controller;
+    setLoadingSuggestions(true);
+    setError('');
+    setSuggestions([]);
+
+    try {
+      const results = await searchAddressesAlternative(query, controller.signal);
+      setSuggestions(results);
+      setFallbackAvailable(false);
+      if (results.length === 0) {
+        setError('Nenhum endereço encontrado na busca alternativa. Tente outro termo ou marque o ponto no mapa.');
+      }
+    } catch (e) {
+      if (e.name !== 'AbortError') {
+        setError(e.message || 'Não foi possível buscar esse endereço. Marque o ponto no mapa ou use sua localização atual.');
+      }
+    } finally {
+      if (!controller.signal.aborted) setLoadingSuggestions(false);
+    }
+  }
+
   function chooseAddress(item) {
+    setFallbackAvailable(false);
     if (!isValidCoordinate(item.latitude, item.longitude)) { setError('Selecione uma sugestão válida para continuar.'); return; }
     setLocation({ latitude: item.latitude, longitude: item.longitude, label: item.label });
     setQuery(item.label); setSuggestions([]); setError(''); setResult(null); setSearched(false);
@@ -81,7 +122,7 @@ export default function ConsultantFinder() {
         <div className="address-wrap">
       <div className="address-input-wrap">
       <Search size={18}/>
-      <input id="visitor-location" className="address-input" value={query} onChange={(e) => { setQuery(e.target.value); setLocation(null); setResult(null); setSearched(false); }} placeholder="Cidade, bairro, CEP ou endereço" autoComplete="off" aria-autocomplete="list" aria-controls="address-suggestions" />
+      <input id="visitor-location" className="address-input" value={query} onChange={(e) => { setQuery(e.target.value); setLocation(null); setResult(null); setSearched(false); setFallbackAvailable(false); }} placeholder="Cidade, bairro, CEP ou endereço" autoComplete="off" aria-autocomplete="list" aria-controls="address-suggestions" />
       </div>
           {loadingSuggestions && <span className="search-status">
       <LoaderCircle className="spin" size={17}/>
@@ -94,6 +135,10 @@ export default function ConsultantFinder() {
         <p className="privacy-note">
       <ShieldCheck size={15}/> A localização é usada para esta busca. O site não grava seus dados em banco de dados.</p>
         {error && <p className="form-error" role="alert">{error}</p>}
+        {fallbackAvailable && <button type="button" className="gps-button" onClick={tryAlternativeSearch} disabled={loadingSuggestions}>
+          {loadingSuggestions ? <LoaderCircle size={17} className="spin"/> : <Search size={17}/>}
+          Tentar busca alternativa
+        </button>}
         <button className="button button-primary find-button" type="submit">
       <Search size={18}/> Encontrar consultor <ArrowUpRight size={17}/>
       </button>
