@@ -57,7 +57,8 @@ npm run preview
 5. **Favicon:** adicione `public/favicon.png` com uma versão apropriada do símbolo oficial. Até lá, o navegador pode mostrar favicon ausente.
 
 ## Busca de endereços e mapa
-- A busca rápida de endereços e a geocodificação reversa usam o Photon (dados OpenStreetMap).
+- A busca rápida de endereços e a geocodificação reversa usam o Photon (dados OpenStreetMap), com os parâmetros documentados `q` e `limit`. Não enviar `lang=pt`: o console mostrou que essa consulta específica retornava HTTP 400 no serviço público.
+- Em desenvolvimento (`npm run dev`), as requisições passam pelo middleware `/__geocoding/photon`, que registra no terminal do VS Code a consulta, o status HTTP, a duração e a resposta de erro. Depois de atualizar o código, pare e reinicie o Vite para carregar o middleware.
 - Se o Photon falhar, o formulário oferece uma busca alternativa por clique usando o Nominatim. Essa alternativa é uma pesquisa pontual iniciada pelo visitante, não autocomplete; não a transforme em busca automática por tecla e respeite a política de uso do Nominatim.
 - O mapa usa Leaflet e tiles do OpenStreetMap, com atribuição visível.
 - O Photon é um serviço comunitário e sua disponibilidade/limites podem mudar. O debounce de busca é de 850 ms; antes de uma operação de produção com tráfego significativo, avalie um provedor com SLA ou uma instância própria, respeitando os termos do provedor. Não faça requisições em massa.
