@@ -6,6 +6,7 @@ import { consultores } from '../data/consultores.js';
 import { findNearestConsultant, createWhatsAppUrl, isValidCoordinate } from '../utils/distance.js';
 import { siteConfig } from '../data/siteConfig.js';
 
+
 export default function ConsultantFinder() {
   const [name, setName] = useState('');
   const [query, setQuery] = useState('');
@@ -67,25 +68,76 @@ export default function ConsultantFinder() {
   const whatsappUrl = result ? createWhatsAppUrl(result.consultant, name) : null;
   return <div className="finder-grid">
     <div className="finder-form-card">
-      <div className="finder-intro"><span className="eyebrow light"><MapPin size={14}/> LOCALIZADOR DE CONSULTORES</span><h3>Vamos encontrar o caminho?</h3><p>Informe seu nome e escolha uma localização para calcular qual consultor cadastrado fica geograficamente mais próximo.</p></div>
+      <div className="finder-intro">
+      <span className="eyebrow light">
+      <MapPin size={14}/> LOCALIZADOR DE CONSULTORES</span>
+      <h3>Vamos encontrar o caminho?</h3>
+      <p>Informe seu nome e escolha uma localização para calcular qual consultor cadastrado fica geograficamente mais próximo.</p>
+      </div>
       <form onSubmit={submit} noValidate>
         <label className="field-label" htmlFor="visitor-name">Como podemos chamar você?</label>
         <input id="visitor-name" className="field" value={name} onChange={(e) => setName(e.target.value)} placeholder="Seu nome" autoComplete="given-name" maxLength={100} />
         <label className="field-label" htmlFor="visitor-location">Sua localização</label>
-        <div className="address-wrap"><div className="address-input-wrap"><Search size={18}/><input id="visitor-location" className="address-input" value={query} onChange={(e) => { setQuery(e.target.value); setLocation(null); setResult(null); setSearched(false); }} placeholder="Cidade, bairro, CEP ou endereço" autoComplete="off" aria-autocomplete="list" aria-controls="address-suggestions" /></div>
-          {loadingSuggestions && <span className="search-status"><LoaderCircle className="spin" size={17}/></span>}
-          {suggestions.length > 0 && <ul className="suggestions" id="address-suggestions" role="listbox">{suggestions.map((item) => <li key={item.id}><button type="button" role="option" onClick={() => chooseAddress(item)}>{item.label}</button></li>)}</ul>}
+        <div className="address-wrap">
+      <div className="address-input-wrap">
+      <Search size={18}/>
+      <input id="visitor-location" className="address-input" value={query} onChange={(e) => { setQuery(e.target.value); setLocation(null); setResult(null); setSearched(false); }} placeholder="Cidade, bairro, CEP ou endereço" autoComplete="off" aria-autocomplete="list" aria-controls="address-suggestions" />
+      </div>
+          {loadingSuggestions && <span className="search-status">
+      <LoaderCircle className="spin" size={17}/>
+      </span>}
+          {suggestions.length > 0 && <ul className="suggestions" id="address-suggestions" role="listbox">{suggestions.map((item) => <li key={item.id}>
+      <button type="button" role="option" onClick={() => chooseAddress(item)}>{item.label}</button>
+      </li>)}</ul>}
         </div>
         <button type="button" className="gps-button" onClick={useDeviceLocation} disabled={gpsLoading}>{gpsLoading ? <LoaderCircle size={17} className="spin"/> : <LocateFixed size={17}/>} Usar minha localização atual</button>
-        <p className="privacy-note"><ShieldCheck size={15}/> A localização é usada para esta busca. O site não grava seus dados em banco de dados.</p>
+        <p className="privacy-note">
+      <ShieldCheck size={15}/> A localização é usada para esta busca. O site não grava seus dados em banco de dados.</p>
         {error && <p className="form-error" role="alert">{error}</p>}
-        <button className="button button-primary find-button" type="submit"><Search size={18}/> Encontrar consultor <ArrowUpRight size={17}/></button>
+        <button className="button button-primary find-button" type="submit">
+      <Search size={18}/> Encontrar consultor <ArrowUpRight size={17}/>
+      </button>
       </form>
     </div>
-    <div className="finder-map-card"><div className="map-heading"><div><span className="eyebrow">ESCOLHA NO MAPA</span><h3>Onde você está?</h3></div><span className="map-live"><span/> Mapa interativo</span></div><LocationMap position={location} onSelect={chooseMapPoint}/>
-      {location && <div className="selected-location"><CheckCircle2 size={17}/><span><strong>Localização selecionada</strong><small>{location.label || `${location.latitude.toFixed(5)}, ${location.longitude.toFixed(5)}`}</small></span><button type="button" onClick={() => { setLocation(null); setQuery(''); setResult(null); setSearched(false); }} aria-label="Limpar localização">Alterar</button></div>}
-      {searched && result && <div className="consultant-result"><div className="result-icon"><MessageCircle size={21}/></div><div className="result-copy"><span className="eyebrow">CONSULTOR MAIS PRÓXIMO</span><h4>{result.consultant.nome}</h4><p>Aproximadamente <strong>{result.distanceKm < 10 ? result.distanceKm.toLocaleString('pt-BR', { maximumFractionDigits: 1 }) : Math.round(result.distanceKm).toLocaleString('pt-BR')} km</strong> em linha reta da localização escolhida.</p><small>Essa distância não representa o trajeto por estrada.</small>{whatsappUrl && <a className="button button-whatsapp" href={whatsappUrl} target="_blank" rel="noreferrer"><MessageCircle size={18}/> Conversar no WhatsApp <ArrowUpRight size={16}/></a>}</div></div>}
-      {searched && !result && <div className="empty-result"><MapPin size={22}/><div><strong>{eligibleCount ? 'Não encontramos um consultor elegível.' : 'Estamos preparando o localizador.'}</strong><p>{eligibleCount ? 'Confira sua localização e tente novamente.' : 'A lista de consultores ainda não foi cadastrada. Para falar com a equipe, acesse o Instagram oficial.'}</p><a href={siteConfig.instagram} target="_blank" rel="noreferrer">Abrir Instagram oficial <ArrowUpRight size={14}/></a></div></div>}
+    <div className="finder-map-card">
+      <div className="map-heading">
+      <div>
+      <span className="eyebrow">ESCOLHA NO MAPA</span>
+      <h3>Onde você está?</h3>
+      </div>
+      <span className="map-live">
+      <span/> Mapa interativo</span>
+      </div>
+      <LocationMap position={location} onSelect={chooseMapPoint}/>
+      {location && <div className="selected-location">
+      <CheckCircle2 size={17}/>
+      <span>
+      <strong>Localização selecionada</strong>
+      <small>{location.label || `${location.latitude.toFixed(5)}, ${location.longitude.toFixed(5)}`}</small>
+      </span>
+      <button type="button" onClick={() => { setLocation(null); setQuery(''); setResult(null); setSearched(false); }} aria-label="Limpar localização">Alterar</button>
+      </div>}
+      {searched && result && <div className="consultant-result">
+      <div className="result-icon">
+      <MessageCircle size={21}/>
+      </div>
+      <div className="result-copy">
+      <span className="eyebrow">CONSULTOR MAIS PRÓXIMO</span>
+      <h4>{result.consultant.nome}</h4>
+      <p>Aproximadamente <strong>{result.distanceKm < 10 ? result.distanceKm.toLocaleString('pt-BR', { maximumFractionDigits: 1 }) : Math.round(result.distanceKm).toLocaleString('pt-BR')} km</strong> em linha reta da localização escolhida.</p>
+      <small>Essa distância não representa o trajeto por estrada.</small>{whatsappUrl && <a className="button button-whatsapp" href={whatsappUrl} target="_blank" rel="noreferrer">
+      <MessageCircle size={18}/> Conversar no WhatsApp <ArrowUpRight size={16}/>
+      </a>}</div>
+      </div>}
+      {searched && !result && <div className="empty-result">
+      <MapPin size={22}/>
+      <div>
+      <strong>{eligibleCount ? 'Não encontramos um consultor elegível.' : 'Estamos preparando o localizador.'}</strong>
+      <p>{eligibleCount ? 'Confira sua localização e tente novamente.' : 'A lista de consultores ainda não foi cadastrada. Para falar com a equipe, acesse o Instagram oficial.'}</p>
+      <a href={siteConfig.instagram} target="_blank" rel="noreferrer">Abrir Instagram oficial <ArrowUpRight size={14}/>
+      </a>
+      </div>
+      </div>}
       {!location && !searched && <div className="map-footnote">Dica: selecione uma sugestão de endereço ou clique no mapa para marcar um ponto.</div>}
     </div>
   </div>;
