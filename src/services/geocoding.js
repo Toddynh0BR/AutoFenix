@@ -1,6 +1,55 @@
 const PHOTON_URL = 'https://photon.komoot.io/api/';
 const NOMINATIM_SEARCH_URL = 'https://nominatim.openstreetmap.org/search';
 
+const PHOTON_RETRY_DELAYS = [350, 900];
+
+/**
+ * Faz uma requisição ao Photon com novas tentativas para falhas transitórias
+ * de rede, limitação de tráfego e erros temporários do servidor.
+ */
+async function fetchPhoton(url, signal) {
+  let lastError;
+
+  for (let attempt = 0; attempt <= PHOTON_RETRY_DELAYS.length; attempt += 1) {
+    if (signal?.aborted) throw new DOMException('A busca foi cancelada.', 'AbortError');
+
+    try {
+      const response = await fetch(url, {
+        signal,
+        headers: { Accept: 'application/json' },
+      });
+
+      if (response.ok) return response;
+
+      // Não repetir erros de requisição; repetir somente erros temporários.
+      if (response.status !== 429 && response.status < 500) {
+        throw new Error(`Photon respondeu com HTTP ${response.status}.`);
+      }
+
+      lastError = new Error(`Photon respondeu com HTTP ${response.status}.`);
+    } catch (error) {
+      if (error.name === 'AbortError') throw error;
+      lastError = error;
+    }
+
+    if (attempt < PHOTON_RETRY_DELAYS.length) {
+      await new Promise((resolve, reject) => {
+        const timeout = setTimeout(resolve, PHOTON_RETRY_DELAYS[attempt]);
+        if (signal) {
+          const onAbort = () => {
+            clearTimeout(timeout);
+            reject(new DOMException('A busca foi cancelada.', 'AbortError'));
+          };
+          if (signal.aborted) onAbort();
+          else signal.addEventListener('abort', onAbort, { once: true });
+        }
+      });
+    }
+  }
+
+  throw lastError || new Error('O Photon não respondeu.');
+}
+
 /**
  * Converte resultados do Photon para o formato utilizado pelo formulário.
  */
@@ -33,8 +82,8 @@ function mapPhotonResults(features = []) {
 }
 
 /**
- * Busca sugestões rápidas no Photon. O serviço é comunitário e pode ficar
- * temporariamente indisponível; a interface oferece uma busca alternativa.
+ * Busca sugestões no Photon. Erros temporários são repetidos automaticamente
+ * antes de informar à interface que o serviço está indisponível.
  */
 export async function searchAddresses(query, signal) {
   const q = query.trim();
@@ -43,9 +92,12 @@ export async function searchAddresses(query, signal) {
   const url = new URL(PHOTON_URL);
   url.search = new URLSearchParams({ q, limit: '5', lang: 'pt' }).toString();
 
-  const response = await fetch(url, { signal, headers: { Accept: 'application/json' } });
-  if (!response.ok) {
-    throw new Error('A busca rápida de endereços está temporariamente indisponível.');
+  let response;
+  try {
+    response = await fetchPhoton(url, signal);
+  } catch (error) {
+    if (error.name === 'AbortError') throw error;
+    throw new Error('Não foi possível conectar à busca de endereços. Tente novamente em alguns segundos.');
   }
 
   const data = await response.json();
@@ -98,12 +150,11 @@ export async function reverseGeocode(latitude, longitude, signal) {
     lang: 'pt',
   }).toString();
 
-  const response = await fetch(url, {
-    signal,
-    headers: { Accept: 'application/json' },
-  });
-
-  if (!response.ok) {
+  let response;
+  try {
+    response = await fetchPhoton(url, signal);
+  } catch (error) {
+    if (error.name === 'AbortError') throw error;
     throw new Error('Não foi possível identificar o endereço desse ponto.');
   }
 
