@@ -1,10 +1,10 @@
 export const siteConfig = {
   name: 'AutoFênix Proteção Veicular',
   instagram: 'https://www.instagram.com/autofenixprotecao/',
-  googleProfile: 'https://share.google/mHJV69Z4Sz7Id5EG6',
-  // Preencha somente depois de confirmar os canais oficiais com a equipe.
-  generalWhatsApp: '',
-  memberSupportUrl: '',
+  googleProfile: 'https://share.google/DGFJ1FJiqqMQZO59Z',
+  // Canais oficiais informados pela equipe da AutoFênix.
+  generalWhatsApp: 'https://wa.me/5581997839132',
+  memberSupportUrl: 'https://wa.me/5581997839132',
   privacyContact: '',
 };
 
