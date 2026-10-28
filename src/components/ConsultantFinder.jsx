@@ -178,8 +178,8 @@ export default function ConsultantFinder() {
       <MapPin size={22}/>
       <div>
       <strong>{eligibleCount ? 'Não encontramos um consultor elegível.' : 'Estamos preparando o localizador.'}</strong>
-      <p>{eligibleCount ? 'Confira sua localização e tente novamente.' : 'A lista de consultores ainda não foi cadastrada. Para falar com a equipe, acesse o Instagram oficial.'}</p>
-      <a href={siteConfig.instagram} target="_blank" rel="noreferrer">Abrir Instagram oficial <ArrowUpRight size={14}/>
+      <p>{eligibleCount ? 'Confira sua localização e tente novamente.' : 'A lista de consultores ainda não foi cadastrada. Você pode falar diretamente com a equipe pelo WhatsApp oficial.'}</p>
+      <a href={siteConfig.generalWhatsApp} target="_blank" rel="noreferrer">Falar com a equipe no WhatsApp <ArrowUpRight size={14}/>
       </a>
       </div>
       </div>}
