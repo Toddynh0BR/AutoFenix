@@ -36,7 +36,12 @@ export default function ConsultantFinder() {
         if (results.length === 0) setError('Nenhum endereço encontrado. Tente informar rua, bairro, cidade ou CEP.');
       } catch (e) {
         if (e.name !== 'AbortError') {
-          setError('A busca rápida de endereços está indisponível. Tente a busca alternativa ou marque o ponto no mapa.');
+          console.error('[AutoFênix][geocoding] A busca automática falhou:', {
+            query,
+            message: e.message,
+            timestamp: new Date().toISOString(),
+          });
+          setError(`A busca de endereços falhou (${e.message || 'erro desconhecido'}). Consulte o terminal do VS Code se estiver rodando npm run dev.`);
           setFallbackAvailable(true);
         }
       } finally {
