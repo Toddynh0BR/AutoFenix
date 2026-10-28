@@ -1872,3 +1872,24 @@ h1,h2,h3,h4,p {
     display: flex;
   }
 }
+
+
+/* Dados cadastrais e horários oficiais */
+.company-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1.25rem;
+  padding: 1.1rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+.company-details strong {
+  flex-basis: 100%;
+  color: #fff;
+  font-weight: 600;
+}
+.company-details span {
+  max-width: 100%;
+}
