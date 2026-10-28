@@ -1582,3 +1582,131 @@ h1,h2,h3,h4,p {
 }
 
 }
+
+
+/* Canais oficiais: WhatsApp, localização e Instagram */
+.nav-whatsapp {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #176bc8;
+  white-space: nowrap;
+}
+
+.nav-whatsapp:hover {
+  color: var(--navy);
+}
+
+.contact-section {
+  background: #fff;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.contact-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 28px;
+  border: 1px solid var(--line);
+  background: #fff;
+  transition: border-color .2s, transform .2s, background .2s;
+}
+
+.contact-card:hover {
+  transform: translateY(-3px);
+  border-color: #a9cafa;
+  background: #fbfdff;
+}
+
+.contact-card-primary {
+  border-color: var(--navy);
+  background: var(--navy);
+  color: #fff;
+}
+
+.contact-card-primary:hover {
+  border-color: #17418b;
+  background: #071f68;
+}
+
+.contact-card-icon {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  margin-bottom: 24px;
+  place-items: center;
+  background: #eaf3ff;
+  color: #176bc8;
+}
+
+.contact-card-primary .contact-card-icon {
+  background: rgba(255, 255, 255, .12);
+  color: #9ac7ff;
+}
+
+.contact-card-kicker {
+  margin-bottom: 8px;
+  color: #3985df;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.contact-card-primary .contact-card-kicker {
+  color: #9ac7ff;
+}
+
+.contact-card strong {
+  margin-bottom: 8px;
+  color: var(--navy);
+  font: 800 18px/1.4 var(--font-display);
+}
+
+.contact-card-primary strong {
+  color: #fff;
+}
+
+.contact-card-detail {
+  min-height: 42px;
+  color: #68758d;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.contact-card-primary .contact-card-detail {
+  color: #d2def4;
+}
+
+.contact-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 18px;
+  color: #176bc8;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.contact-card-primary .contact-card-link {
+  color: #9ac7ff;
+}
+
+@media (max-width: 800px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-card {
+    padding: 24px;
+  }
+
+  .contact-card-icon {
+    margin-bottom: 18px;
+  }
+}
