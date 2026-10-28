@@ -230,6 +230,35 @@ export default function App() {
       </a>
       </section>
 
+    <section className="contact-section section-pad" id="contato">
+      <div className="section-shell">
+      <SectionHeading kicker="CANAIS OFICIAIS" title="Fale com a AutoFênix." text="Escolha o canal mais conveniente para conversar com nossa equipe ou consultar nossa localização."/>
+      <div className="contact-grid">
+      <a className="contact-card contact-card-primary" href={siteConfig.generalWhatsApp} target="_blank" rel="noreferrer">
+      <span className="contact-card-icon"><MessageCircle size={23}/></span>
+      <span className="contact-card-kicker">ATENDIMENTO</span>
+      <strong>Converse pelo WhatsApp</strong>
+      <span className="contact-card-detail">(81) 99783-9132</span>
+      <span className="contact-card-link">Iniciar conversa <ArrowUpRight size={16}/></span>
+      </a>
+      <a className="contact-card" href={siteConfig.googleProfile} target="_blank" rel="noreferrer">
+      <span className="contact-card-icon"><MapPin size={23}/></span>
+      <span className="contact-card-kicker">LOCALIZAÇÃO</span>
+      <strong>Encontre nossa empresa</strong>
+      <span className="contact-card-detail">Consulte o endereço e a rota no Google Maps.</span>
+      <span className="contact-card-link">Ver no mapa <ArrowUpRight size={16}/></span>
+      </a>
+      <a className="contact-card" href={siteConfig.instagram} target="_blank" rel="noreferrer">
+      <span className="contact-card-icon"><Instagram size={23}/></span>
+      <span className="contact-card-kicker">REDES SOCIAIS</span>
+      <strong>Acompanhe o Instagram</strong>
+      <span className="contact-card-detail">@autofenixprotecao</span>
+      <span className="contact-card-link">Abrir perfil <ArrowUpRight size={16}/></span>
+      </a>
+      </div>
+      </div>
+      </section>
+
     <section className="faq-section section-pad" id="duvidas">
       <div className="faq-layout">
       <div className="faq-side">
