@@ -75,7 +75,7 @@ function Footer() {
       <span>Feito para aproximar pessoas e informação.</span>
       </div>
       <div className="privacy-disclosure" id="privacidade">
-      <strong>Privacidade:</strong> este site não grava o nome nem a localização em banco de dados. A busca de endereços e os mapas usam serviços externos (Photon/OpenStreetMap), que recebem solicitações necessárias ao funcionamento. Não são utilizados cookies de analytics nesta versão. Para publicar, confirme e atualize este texto conforme os serviços e a política efetivamente adotados.</div>
+      <strong>Privacidade:</strong> este site não grava o nome nem a localização em banco de dados. A busca de endereços usa Photon e pode recorrer ao Nominatim mediante ação manual do visitante; o mapa usa OpenStreetMap. Esses serviços recebem as solicitações necessárias ao funcionamento. Não são utilizados cookies de analytics nesta versão. Para publicar, confirme e atualize este texto conforme os serviços e a política efetivamente adotados.</div>
       </footer>;
 }
 
