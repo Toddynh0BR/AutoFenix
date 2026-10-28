@@ -1,7 +1,7 @@
 import { Component } from 'react';
 
 /**
- * Preventa que um erro de renderização deixe o site inteiro em branco.
+ * Impede que um erro de renderização deixe o site inteiro em branco.
  * Em desenvolvimento, mostra a mensagem para facilitar o diagnóstico.
  */
 export default class AppErrorBoundary extends Component {
