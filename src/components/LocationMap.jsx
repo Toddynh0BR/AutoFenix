@@ -23,8 +23,8 @@ function ClickHandler({ onSelect }) {
 
 export default function LocationMap({ position, onSelect }) {
   const center = position ? [position.latitude, position.longitude] : [-8.283, -35.976];
-  return <div className="map-shell" aria-label="Mapa interativo para selecionar sua localização">
-    <MapContainer center={center} zoom={position ? 13 : 7} scrollWheelZoom={false} className="location-map">
+  return <div className="map-shell" role="region" aria-label="Mapa interativo. Use os controles do mapa para navegar e clique para selecionar a localização.">
+    <MapContainer center={center} zoom={position ? 13 : 7} scrollWheelZoom={false} keyboard={true} className="location-map">
       <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       {position && <Marker position={[position.latitude, position.longitude]} icon={markerIcon} />}
       <MapUpdater position={position} />
