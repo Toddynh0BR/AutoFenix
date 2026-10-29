@@ -30,6 +30,7 @@ function Header() {
   }
 
   return (
+    <a className="skip-link" href="#conteudo-principal">Pular para o conteúdo principal</a>
     <header className="site-header">
       <div className="header-inner">
         <a href="#inicio" className="brand" aria-label="AutoFênix — início">
@@ -40,13 +41,15 @@ function Header() {
           className="mobile-toggle"
           aria-label={open ? 'Fechar menu' : 'Abrir menu'}
           aria-expanded={open}
+          aria-controls="main-navigation"
           onClick={() => setOpen((current) => !current)}
         >
           {open ? <X /> : <Menu />}
         </button>
 
         <nav
-          className={`main-nav ${open ? 'is-open' : ''}`}
+          id="main-navigation"
+          className={`main-nav ${open ? 'is-open' : ''}`
           aria-label="Navegação principal"
         >
           {links.map(([label, href]) => (
@@ -83,7 +86,7 @@ function FAQ() {
       <h3>
       <button aria-expanded={active === index} onClick={() => setActive(active === index ? -1 : index)}>{item.q}<ChevronDown size={20}/>
       </button>
-      </h3><div className={`faq-answer ${active === index ? 'is-open' : ''}`} aria-hidden={active !== index}>
+      </h3><div id={`faq-answer-${index}`} role="region" aria-labelledby={`faq-question-${index}`} className={`faq-answer ${active === index ? 'is-open' : ''}`} aria-hidden={active !== index}>
       <div className="faq-answer-inner"><p>{item.a}</p></div>
       </div></article>)}</div>;
 }
@@ -114,7 +117,7 @@ function Footer() {
       <a href={siteConfig.generalWhatsApp} target="_blank" rel="noreferrer">WhatsApp: (81) 99783-9132 <ArrowUpRight size={14}/>
       </a>
       <a href="#associados">Atendimento a associados</a>
-      <a href="#privacidade">Política de privacidade</a>
+      <a href="/privacidade.html">Política de privacidade</a>
       </div>
       </div>
       <div className="company-details">
@@ -128,8 +131,8 @@ function Footer() {
       <span>© {new Date().getFullYear()} AutoFênix Proteção Veicular.</span>
       <span>Feito para aproximar pessoas e informação.</span>
       </div>
-      <div className="privacy-disclosure" id="privacidade">
-      <strong>Privacidade:</strong> este site não grava o nome nem a localização em banco de dados. A busca de endereços usa Photon e pode recorrer ao Nominatim mediante ação manual do visitante; o mapa usa OpenStreetMap. Esses serviços recebem as solicitações necessárias ao funcionamento. Não são utilizados cookies de analytics nesta versão. Para publicar, confirme e atualize este texto conforme os serviços e a política efetivamente adotados.</div>
+      <div className="privacy-disclosure">
+      <strong>Privacidade:</strong> explicamos quais dados são tratados, para quais finalidades e quais são seus direitos na <a href="/privacidade.html">Política de Privacidade</a>.</div>
       </footer>;
 }
 
@@ -140,7 +143,7 @@ export default function App() {
 
   return <>
       <Header/>
-      <main>
+      <main id="conteudo-principal" tabIndex="-1">
     <section className="hero" id="inicio">
       <div className="hero-gridline"/>
       <div className="hero-content">
@@ -171,7 +174,7 @@ export default function App() {
       <div className="art-orbit orbit-two"/>
       <div className="art-glow"/>
       <img className="hero-phoenix" src={phoenix} alt=""/>
-      <img className="susep-badge" src={susepBadge} alt="Selo ilustrativo de referência da SUSEP" />
+      <img className="susep-badge" src={susepBadge} alt="Imagem ilustrativa de referência; não representa certificação ou autorização oficial da SUSEP" />
       <div className="art-spark spark-one"/>
       <div className="art-spark spark-two"/>
       </div>
