@@ -83,9 +83,9 @@ function FAQ() {
       <h3>
       <button aria-expanded={active === index} onClick={() => setActive(active === index ? -1 : index)}>{item.q}<ChevronDown size={20}/>
       </button>
-      </h3>{active === index && <div className="faq-answer">
-      <p>{item.a}</p>
-      </div>}</article>)}</div>;
+      </h3><div className={`faq-answer ${active === index ? 'is-open' : ''}`} aria-hidden={active !== index}>
+      <div className="faq-answer-inner"><p>{item.a}</p></div>
+      </div></article>)}</div>;
 }
 
 function Footer() {
