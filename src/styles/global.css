@@ -1191,6 +1191,45 @@ h1,h2,h3,h4,p {
 .privacy-disclosure strong {
   color:#62708a
 }
+/* Mantém a navegação desktop em uma única linha em notebooks e telas médias. */
+@media (min-width: 801px) and (max-width: 1280px) {
+  .header-inner {
+    gap: 14px;
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  .brand {
+    flex: 0 0 auto;
+  }
+
+  .brand img {
+    width: 166px;
+  }
+
+  .main-nav {
+    flex: 1;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 11px;
+  }
+
+  .main-nav > a:not(.nav-cta) {
+    white-space: nowrap;
+  }
+
+  .nav-cta {
+    flex: 0 0 auto;
+    gap: 6px;
+    padding: 10px 12px;
+    white-space: nowrap;
+  }
+
+  .nav-whatsapp {
+    flex: 0 0 auto;
+  }
+}
+
 @media(max-width:1050px) {
   .main-nav {
   gap:16px;
