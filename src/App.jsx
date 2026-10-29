@@ -50,7 +50,7 @@ function Header() {
 
         <nav
           id="main-navigation"
-          className={`main-nav ${open ? 'is-open' : ''}`
+          className={`main-nav ${open ? 'is-open' : ''}`}
           aria-label="Navegação principal"
         >
           {links.map(([label, href]) => (
