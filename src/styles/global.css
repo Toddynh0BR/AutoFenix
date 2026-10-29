@@ -263,6 +263,19 @@ h1,h2,h3,h4,p {
   background:rgba(51,153,255,.16);
   filter:blur(60px)
 }
+
+/* Selo ilustrativo no destaque principal */
+.susep-badge {
+  position:absolute;
+  z-index:3;
+  right:0;
+  bottom:13%;
+  width:clamp(125px, 11vw, 175px);
+  height:auto;
+  object-fit:contain;
+  filter:drop-shadow(0 8px 20px rgba(0, 8, 35, .22))
+}
+
 .art-caption {
   position:absolute;
   z-index:3;
@@ -983,7 +996,7 @@ h1,h2,h3,h4,p {
 }
 .faq-side {
   position:relative;
-  overflow:hidden
+  overflow:visible
 }
 .faq-side .eyebrow {
   margin-bottom:14px
@@ -998,14 +1011,15 @@ h1,h2,h3,h4,p {
 }
 .faq-decoration {
   position:absolute;
-  left:-55px;
-  bottom:-125px;
-  width:230px;
-  height:230px;
+  left:0;
+  bottom:-45px;
+  width:190px;
+  height:190px;
   border:1px solid #e0e9f7;
   border-radius:50%;
   display:grid;
-  place-items:center
+  place-items:center;
+  pointer-events:none
 }
 .faq-decoration:after {
   content:"";
@@ -1931,4 +1945,13 @@ h1,h2,h3,h4,p {
 }
 .company-details span {
   max-width: 100%;
+}
+
+
+@media (max-width: 800px) {
+  .susep-badge {
+    width:112px;
+    right:0;
+    bottom:16%;
+  }
 }
