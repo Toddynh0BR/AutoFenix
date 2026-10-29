@@ -2087,3 +2087,30 @@ h1,h2,h3,h4,p {
     animation: none !important;
   }
 }
+
+
+/* Reforça o contraste dos rótulos azuis sobre fundos claros. */
+.eyebrow,
+.contact-card-kicker,
+.plan-card-heading .eyebrow {
+  color: #176bc8;
+}
+.hero-kicker,
+.eyebrow.light,
+.heading-light .eyebrow,
+.final-cta .eyebrow {
+  color: #b8d8ff;
+}
+.benefit-number,
+.footer-bottom,
+.footer-links a,
+.map-hint,
+.map-footnote {
+  color: #53617a;
+}
+.faq-answer {
+  transition: grid-template-rows .3s ease, opacity .22s ease, transform .3s ease, visibility 0s linear .3s;
+}
+.faq-answer.is-open {
+  transition: grid-template-rows .3s ease, opacity .22s ease, transform .3s ease, visibility 0s;
+}
