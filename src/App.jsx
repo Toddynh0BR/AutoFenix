@@ -30,8 +30,9 @@ function Header() {
   }
 
   return (
-    <a className="skip-link" href="#conteudo-principal">Pular para o conteúdo principal</a>
-    <header className="site-header">
+    <>
+      <a className="skip-link" href="#conteudo-principal">Pular para o conteúdo principal</a>
+      <header className="site-header">
       <div className="header-inner">
         <a href="#inicio" className="brand" aria-label="AutoFênix — início">
           <img src={wordmark} alt="AutoFênix Proteção Veicular" />
@@ -72,7 +73,8 @@ function Header() {
           </a>
         </nav>
       </div>
-    </header>
+      </header>
+    </>
   );
 }
 
