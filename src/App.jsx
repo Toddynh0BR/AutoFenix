@@ -8,21 +8,68 @@ import wordmark from './assets/logos/wordmark.svg';
 const iconMap = { messages: MessageCircle, 'file-check': FileCheck2, users: Users };
 
 
+/**
+ * Cabeçalho principal e navegação responsiva do site.
+ * Em telas pequenas, os links são agrupados no menu expansível.
+ */
 function Header() {
   const [open, setOpen] = useState(false);
-  const links = [['A associação', '#associacao'], ['Planos', '#planos'], ['Como funciona', '#como-funciona'], ['Encontre um consultor', '#consultor'], ['Contato', '#contato'], ['Dúvidas frequentes', '#duvidas']];
-  return <header className="site-header">
+
+  const links = [
+    ['A associação', '#associacao'],
+    ['Planos', '#planos'],
+    ['Como funciona', '#como-funciona'],
+    ['Encontre um consultor', '#consultor'],
+    ['Contato', '#contato'],
+    ['Dúvidas frequentes', '#duvidas'],
+  ];
+
+  function closeMenu() {
+    setOpen(false);
+  }
+
+  return (
+    <header className="site-header">
       <div className="header-inner">
-      <a href="#inicio" className="brand" aria-label="AutoFênix — início">
-      <img src={wordmark} alt="AutoFênix Proteção Veicular" />
-      </a>
-    <button className="mobile-toggle" aria-label={open ? 'Fechar menu' : 'Abrir menu'} aria-expanded={open} onClick={() => setOpen(!open)}>{open ? <X/> : <Menu/>}</button>
-    <nav className={`main-nav ${open ? 'is-open' : ''}`} aria-label="Navegação principal">{links.map(([label, href]) => <a key={href} href={href} onClick={() => setOpen(false)}>{label}</a>)}<a className="nav-cta" href="#consultor" onClick={() => setOpen(false)}>Falar com consultor <ArrowUpRight size={16}/>
-      </a>
-      <a className="nav-whatsapp" href={siteConfig.generalWhatsApp} target="_blank" rel="noreferrer"><MessageCircle size={16}/> WhatsApp</a>
-      </nav>
-  </div>
-      </header>;
+        <a href="#inicio" className="brand" aria-label="AutoFênix — início">
+          <img src={wordmark} alt="AutoFênix Proteção Veicular" />
+        </a>
+
+        <button
+          className="mobile-toggle"
+          aria-label={open ? 'Fechar menu' : 'Abrir menu'}
+          aria-expanded={open}
+          onClick={() => setOpen((current) => !current)}
+        >
+          {open ? <X /> : <Menu />}
+        </button>
+
+        <nav
+          className={`main-nav ${open ? 'is-open' : ''}`}
+          aria-label="Navegação principal"
+        >
+          {links.map(([label, href]) => (
+            <a key={href} href={href} onClick={closeMenu}>
+              {label}
+            </a>
+          ))}
+
+          <a className="nav-cta" href="#consultor" onClick={closeMenu}>
+            Falar com consultor <ArrowUpRight size={16} />
+          </a>
+
+          <a
+            className="nav-whatsapp"
+            href={siteConfig.generalWhatsApp}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <MessageCircle size={16} /> WhatsApp
+          </a>
+        </nav>
+      </div>
+    </header>
+  );
 }
 
 function SectionHeading({ kicker, title, text, light = false }) { return <div className={`section-heading ${light ? 'heading-light' : ''}`}>
