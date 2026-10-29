@@ -4,6 +4,7 @@ import ConsultantFinder from './components/ConsultantFinder.jsx';
 import { benefits, faqs, siteConfig, vehiclePlans } from './data/siteConfig.js';
 import phoenix from './assets/logos/phoenix-mark.svg';
 import wordmark from './assets/logos/wordmark.svg';
+import susepBadge from './assets/logos/susep-badge-reference-only.png';
 
 const iconMap = { messages: MessageCircle, 'file-check': FileCheck2, users: Users };
 
@@ -170,15 +171,7 @@ export default function App() {
       <div className="art-orbit orbit-two"/>
       <div className="art-glow"/>
       <img className="hero-phoenix" src={phoenix} alt=""/>
-      <div className="art-caption">
-      <span className="caption-mark">
-      <Shield size={18}/>
-      </span>
-      <span>
-      <strong>AutoFênix</strong>
-      <small>Proteção Veicular</small>
-      </span>
-      </div>
+      <img className="susep-badge" src={susepBadge} alt="Selo ilustrativo de referência da SUSEP" />
       <div className="art-spark spark-one"/>
       <div className="art-spark spark-two"/>
       </div>
