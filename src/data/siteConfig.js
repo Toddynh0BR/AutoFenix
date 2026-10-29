@@ -7,9 +7,9 @@ export const siteConfig = {
   whatsappHours: 'Atendimento pelo WhatsApp 24 horas de segunda a sexta-feira. Não há atendimento aos sábados e domingos.',
   instagram: 'https://www.instagram.com/autofenixprotecao/',
   googleProfile: 'https://share.google/DGFJ1FJiqqMQZO59Z',
-  // Canais oficiais informados pela equipe da AutoFênix.
-  generalWhatsApp: 'https://wa.me/5581997839132',
-  memberSupportUrl: 'https://wa.me/5581997839132',
+  // Canais oficiais com mensagem inicial para facilitar o contato.
+  generalWhatsApp: 'https://wa.me/5581997839132?text=Ol%C3%A1%21%20Encontrei%20o%20site%20da%20AutoF%C3%AAnix%20Prote%C3%A7%C3%A3o%20Veicular%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es.',
+  memberSupportUrl: 'https://wa.me/5581997839132?text=Ol%C3%A1%21%20Sou%20associado%20da%20AutoF%C3%AAnix%20e%20preciso%20de%20orienta%C3%A7%C3%A3o%20da%20equipe.',
   privacyContact: '',
 };
 
