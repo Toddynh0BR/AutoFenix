@@ -122,7 +122,7 @@ export default function ConsultantFinder() {
     setSearched(true); setResult(findNearestConsultant(location, consultores));
   }
   const whatsappUrl = result ? createWhatsAppUrl(result.consultant, name) : null;
-  return <div className="finder-grid">
+  return <div className="finder-grid" aria-busy={loadingSuggestions || gpsLoading}>
     <div className="finder-form-card">
       <div className="finder-intro">
       <span className="eyebrow light">
@@ -135,11 +135,12 @@ export default function ConsultantFinder() {
         <input id="visitor-name" className="field" value={name} onChange={(e) => setName(e.target.value)} placeholder="Seu nome" autoComplete="given-name" maxLength={100} />
         <label className="field-label" htmlFor="visitor-location">Sua localização</label>
         <div className="address-wrap">
+      <span id="address-search-help" className="sr-only">Digite pelo menos três caracteres e escolha uma sugestão. Você também pode marcar um ponto no mapa ou usar sua localização atual.</span>
       <div className="address-input-wrap">
       <Search size={18}/>
-      <input id="visitor-location" className="address-input" value={query} onChange={(e) => { setQuery(e.target.value); setLocation(null); setResult(null); setSearched(false); setFallbackAvailable(false); }} placeholder="Cidade, bairro, CEP ou endereço" autoComplete="off" aria-autocomplete="list" aria-controls="address-suggestions" />
+      <input id="visitor-location" className="address-input" value={query} onChange={(e) => { setQuery(e.target.value); setLocation(null); setResult(null); setSearched(false); setFallbackAvailable(false); }} placeholder="Cidade, bairro, CEP ou endereço" autoComplete="off" aria-autocomplete="list" aria-controls="address-suggestions" aria-describedby="address-search-help" />
       </div>
-          {loadingSuggestions && <span className="search-status">
+          {loadingSuggestions && <span className="search-status" role="status" aria-live="polite" aria-label="Buscando endereços">
       <LoaderCircle className="spin" size={17}/>
       </span>}
           {suggestions.length > 0 && <ul className="suggestions" id="address-suggestions" role="listbox">{suggestions.map((item) => <li key={item.id}>
@@ -148,8 +149,8 @@ export default function ConsultantFinder() {
         </div>
         <button type="button" className="gps-button" onClick={useDeviceLocation} disabled={gpsLoading}>{gpsLoading ? <LoaderCircle size={17} className="spin"/> : <LocateFixed size={17}/>} Usar minha localização atual</button>
         <p className="privacy-note">
-      <ShieldCheck size={15}/> A localização é usada para esta busca. O site não grava seus dados em banco de dados.</p>
-        {error && <p className="form-error" role="alert">{error}</p>}
+      <ShieldCheck size={15}/> A localização é usada apenas para esta busca. Consulte a <a href="/privacidade.html">Política de Privacidade</a> para saber como os serviços externos são utilizados.</p>
+        {error && <p className="form-error" role="alert" aria-live="assertive">{error}</p>}
         {fallbackAvailable && <button type="button" className="gps-button" onClick={tryAlternativeSearch} disabled={loadingSuggestions}>
           {loadingSuggestions ? <LoaderCircle size={17} className="spin"/> : <Search size={17}/>}
           Tentar busca alternativa
@@ -177,7 +178,7 @@ export default function ConsultantFinder() {
       </span>
       <button type="button" onClick={() => { setLocation(null); setQuery(''); setResult(null); setSearched(false); }} aria-label="Limpar localização">Alterar</button>
       </div>}
-      {searched && result && <div className="consultant-result" ref={resultRef}>
+      {searched && result && <div className="consultant-result" ref={resultRef} role="status" aria-live="polite">
       <div className="result-icon">
       <MessageCircle size={21}/>
       </div>
@@ -189,7 +190,7 @@ export default function ConsultantFinder() {
       <MessageCircle size={18}/> Conversar no WhatsApp <ArrowUpRight size={16}/>
       </a>}</div>
       </div>}
-      {searched && !result && <div className="empty-result" ref={resultRef}>
+      {searched && !result && <div className="empty-result" ref={resultRef} role="status" aria-live="polite">
       <MapPin size={22}/>
       <div>
       <strong>{eligibleCount ? 'Não encontramos um consultor elegível.' : 'Estamos preparando o localizador.'}</strong>
