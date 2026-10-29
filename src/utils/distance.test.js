@@ -28,7 +28,8 @@ describe('distance helpers', () => {
   it('builds a properly encoded WhatsApp link', () => {
     const url = createWhatsAppUrl(people[0], 'Ana Maria');
     expect(url).toContain('https://wa.me/5581999999999?text=');
-    expect(decodeURIComponent(url)).toContain('Olá, Ana Maria!');
+    expect(decodeURIComponent(url)).toContain('Olá, Consultor distante!');
+    expect(decodeURIComponent(url)).toContain('Me chamo Ana Maria');
     expect(createWhatsAppUrl({ telefone: '123' }, 'Ana')).toBeNull();
   });
 });
