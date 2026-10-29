@@ -31,8 +31,20 @@ export function findNearestConsultant(location, consultants = []) {
   return ranked[0] ?? null;
 }
 
+/**
+ * Monta a conversa do WhatsApp com o nome do consultor encontrado.
+ * O nome do visitante não deve aparecer como destinatário da mensagem.
+ */
 export function createWhatsAppUrl(consultant, visitorName) {
-  if (!consultant || !/^\d{12,15}$/.test(String(consultant.telefone ?? '')) || !visitorName?.trim()) return null;
-  const message = `Olá, ${visitorName.trim()}! Encontrei seu contato pelo site da AutoFênix Proteção Veicular e gostaria de conhecer melhor a associação e suas condições.`;
-  return `https://wa.me/${consultant.telefone}?text=${encodeURIComponent(message)}`;
+  const phone = String(consultant?.telefone ?? '');
+  const consultantName = consultant?.nome?.trim();
+
+  if (!consultantName || !/^\d{12,15}$/.test(phone) || !visitorName?.trim()) {
+    return null;
+  }
+
+  const message =
+    `Olá, ${consultantName}! Encontrei seu contato pelo site da AutoFênix Proteção Veicular e gostaria de saber mais sobre os planos de proteção veicular.`;
+
+  return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 }
