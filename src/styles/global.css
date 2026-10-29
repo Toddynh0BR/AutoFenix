@@ -264,13 +264,12 @@ h1,h2,h3,h4,p {
   filter:blur(60px)
 }
 
-/* Selo ilustrativo no destaque principal */
 .susep-badge {
   position:absolute;
   z-index:3;
   right:0;
   bottom:13%;
-  width:clamp(125px, 11vw, 175px);
+  width:clamp(90px, 11vw, 140px);
   height:auto;
   object-fit:contain;
   filter:drop-shadow(0 8px 20px rgba(0, 8, 35, .22))
@@ -1953,5 +1952,6 @@ h1,h2,h3,h4,p {
     width:112px;
     right:0;
     bottom:16%;
+    display: none;
   }
 }
