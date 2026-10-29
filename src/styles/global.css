@@ -2114,3 +2114,12 @@ h1,h2,h3,h4,p {
 .faq-answer.is-open {
   transition: grid-template-rows .3s ease, opacity .22s ease, transform .3s ease, visibility 0s;
 }
+
+/* Alinha os dados cadastrais com as colunas do rodapé em telas desktop. */
+@media (min-width: 801px) {
+  .company-details {
+    max-width: var(--container);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
