@@ -8,6 +8,7 @@ export const consultores = [
   // Exemplo estrutural — substitua por dados reais antes da publicação:
   // { id: 'consultor-001', nome: 'Nome real', telefone: '55DDNUMERO', latitude: -8.000000, longitude: -36.000000, ativo: true },-8.00563, -36.06476
   { id: 'consultor-001', nome: 'Jefferson Junior', telefone: '5581997839132', latitude: -7.95428, longitude: -36.20714, ativo: true },
+  { id: 'consultor-001', nome: 'Jefferson Junior', telefone: '5581997839132', latitude: -8.28340, longitude: -35.97756, ativo: true },
   { id: 'consultor-002', nome: 'Sandro', telefone: '558196825750', latitude: -8.00563, longitude: -36.06476, ativo: true },
   { id: 'consultor-003', nome: 'Antonio Barbosa', telefone: '558181379080', latitude: -7.74512, longitude: -35.87954, ativo: true },
   { id: 'consultor-004', nome: 'Carla Valkiria', telefone: '558199715599', latitude: -7.87404, longitude: -35.44163, ativo: true },

@@ -41,7 +41,7 @@ export default function ConsultantFinder() {
             message: e.message,
             timestamp: new Date().toISOString(),
           });
-          setError(`A busca de endereços falhou (${e.message || 'erro desconhecido'}). Consulte o terminal do VS Code se estiver rodando npm run dev.`);
+          setError(`A busca de endereços falhou.`);
           setFallbackAvailable(true);
         }
       } finally {
