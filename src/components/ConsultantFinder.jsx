@@ -20,7 +20,17 @@ export default function ConsultantFinder() {
   const [searched, setSearched] = useState(false);
   const abortRef = useRef(null);
   const timerRef = useRef(null);
+  const resultRef = useRef(null);
   const eligibleCount = consultores.filter((c) => c?.ativo === true && c.nome?.trim() && /^\d{12,15}$/.test(String(c.telefone ?? '')) && isValidCoordinate(c.latitude, c.longitude)).length;
+
+  // Em celulares, leve o resultado à área visível após a busca.
+  useEffect(() => {
+    if (!searched || typeof window === 'undefined') return;
+    if (window.matchMedia('(max-width: 800px)').matches) {
+      resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [searched, result]);
+
 
   useEffect(() => {
     if (location || query.trim().length < 3) { setSuggestions([]); setLoadingSuggestions(false); return; }
@@ -167,7 +177,7 @@ export default function ConsultantFinder() {
       </span>
       <button type="button" onClick={() => { setLocation(null); setQuery(''); setResult(null); setSearched(false); }} aria-label="Limpar localização">Alterar</button>
       </div>}
-      {searched && result && <div className="consultant-result">
+      {searched && result && <div className="consultant-result" ref={resultRef}>
       <div className="result-icon">
       <MessageCircle size={21}/>
       </div>
@@ -179,7 +189,7 @@ export default function ConsultantFinder() {
       <MessageCircle size={18}/> Conversar no WhatsApp <ArrowUpRight size={16}/>
       </a>}</div>
       </div>}
-      {searched && !result && <div className="empty-result">
+      {searched && !result && <div className="empty-result" ref={resultRef}>
       <MapPin size={22}/>
       <div>
       <strong>{eligibleCount ? 'Não encontramos um consultor elegível.' : 'Estamos preparando o localizador.'}</strong>
