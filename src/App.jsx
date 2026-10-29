@@ -84,7 +84,7 @@ function FAQ() {
   const [active, setActive] = useState(0);
   return <div className="faq-list">{faqs.map((item, index) => <article className={`faq-item ${active === index ? 'active' : ''}`} key={item.q}>
       <h3>
-      <button aria-expanded={active === index} onClick={() => setActive(active === index ? -1 : index)}>{item.q}<ChevronDown size={20}/>
+      <button id={`faq-question-${index}`} aria-controls={`faq-answer-${index}`} aria-expanded={active === index} onClick={() => setActive(active === index ? -1 : index)}>{item.q}<ChevronDown size={20} aria-hidden="true"/>
       </button>
       </h3><div id={`faq-answer-${index}`} role="region" aria-labelledby={`faq-question-${index}`} className={`faq-answer ${active === index ? 'is-open' : ''}`} aria-hidden={active !== index}>
       <div className="faq-answer-inner"><p>{item.a}</p></div>
